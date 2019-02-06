@@ -44,7 +44,11 @@
 
 	> `mdmnextci-usw2.cloudtrust.rocks` must match the CN as specified in Step #1.   
 
-	* Import certs into the keystore. E.g.
+	* Copy the generated keystore to the Jenkins host:
+	```scp -i /path/of/jenkins/ssh/key jenkins_keystore.p12 USER@JENKINSHOST:/home/centos/```
+	* On the Jenkins host, create keystore directory: ```mkdir /var/lib/jenkins/keystore/```
+	* Move the keystore to the directory: ```mv /home/centos/jenkins_keystore.p12 /var/lib/jenkins/keystore/```
+	* Import into Jenkins:
 
 	```
 	keytool -importkeystore -srckeystore jenkins_keystore.p12 -srcstorepass 'changeit' -srcstoretype PKCS12 -srcalias mdmnextci-usw2.cloudtrust.rocks -deststoretype JKS -destkeystore jenkins_keystore.jks -deststorepass 'changeit' -destalias mdmnextci-usw2.cloudtrust.rocks
@@ -57,7 +61,7 @@
 	JENKINS_JAVA_OPTIONS="$JENKINS_JAVA_OPTIONS -Djenkins.install.runSetupWizard=false"
 	JENKINS_HTTPS_PORT="8443"
 	JENKINS_HTTPS_KEYSTORE="/var/lib/jenkins/keystore/jenkins_keystore.jks"
-	JENKINS_HTTPS_KEYSTORE_PASSWORD="changeme"
+	JENKINS_HTTPS_KEYSTORE_PASSWORD="changeit"
 	JENKINS_HTTPS_LISTEN_ADDRESS="0.0.0.0"
 	JENKINS_PORT="-1" # Don't change this until you are sure HTTPS is working.
 	```
