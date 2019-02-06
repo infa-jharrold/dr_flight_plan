@@ -1,4 +1,4 @@
-# # DR Region Setup Flight Plan
+# DR Region Setup Flight Plan
 #### Create CTP tickets in JIRA for the following purposes.
 
 1. VPC peering needs to be in place for the primary and DR region. This is necessary for two purposes:
